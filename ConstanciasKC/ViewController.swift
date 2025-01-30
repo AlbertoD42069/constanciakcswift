@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class ViewController: UIViewController {
+    
+    let dbKinderCuauhtemoc = Firestore.firestore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
