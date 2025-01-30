@@ -9,11 +9,16 @@ import UIKit
 import FirebaseFirestore
 
 class ViewController: UIViewController {
-    
-    let dbKinderCuauhtemoc = Firestore.firestore()
+    private let viewModel = ViewModel()
+    private var certificateData: [CertificateData] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.getCertificate(coleccion: "alumnosKC") { certificate in
+            self.certificateData = certificate
+            print(self.certificateData)
+            
+        }
         // Do any additional setup after loading the view.
     }
 
