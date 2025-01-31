@@ -19,3 +19,15 @@ struct CertificateData: Codable {
     var primerApellido: String?
     var segundoApellido: String?
 }
+struct CertificateDataRequest: Codable {
+    var cicloEscolar: String?
+    var curp: String?
+    var fechaExpedicion: String?
+    var fechaNacimiento: String?
+    var grado: String?
+    var horaExpedicion: String?
+    var matricula: String?
+    var nombres: String?
+    var primerApellido: String?
+    var segundoApellido: String?
+}
