@@ -18,8 +18,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //authUser()
-        //getDataStudents()
+        authUser()
+        getDataStudents()
         
     }
     func getDataStudents() {
