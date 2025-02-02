@@ -13,15 +13,31 @@ class ViewController: UIViewController {
     private let viewModel = ViewModel()
     private var certificateData: [CertificateData] = []
     private var certificateDataRequest: [CertificateDataRequest] = []
-     private let emailKC = "adela.dominguez@kindercuauhtemoc.com"
-     private let passwordKC = "C0nstK1nd3r"
+    
+    private let viewLoginKC: LoginUIView = {
+        let view = LoginUIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        authUser()
-        getDataStudents()
-        
+        addComponetsKC()
+        setupConstraintsKC()
+        viewLoginKC.loginKCDelegate = self
     }
+    func addComponetsKC() {
+        view.addSubview(viewLoginKC)
+    }
+    func setupConstraintsKC() {
+        NSLayoutConstraint.activate([
+            viewLoginKC.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            viewLoginKC.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            viewLoginKC.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            viewLoginKC.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+        ])
+    }
+    
     func getDataStudents() {
         viewModel.getCertificate(coleccion: "alumnosKC") { certificate in
             self.certificateData = certificate
@@ -45,8 +61,13 @@ class ViewController: UIViewController {
         }
 
     }
-    func authUser(){
-        viewModel.userAuthKC(user: emailKC, password: passwordKC)
-    }
 }
 
+extension ViewController: LoginProtocol {
+    func login(userName: String, password: String) {
+        let vcHomeKC = HomeKCUITabBarController()
+        viewModel.userAuthKC(user: userName, password: password)
+        self.navigationController?.pushViewController(vcHomeKC, animated: true)
+    }
+    
+}

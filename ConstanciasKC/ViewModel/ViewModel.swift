@@ -32,6 +32,7 @@ class ViewModel {
             if let result = result, error == nil{
                 print("inicio de sesion correcto con usuario \(result.user.email!)")
             }else {
+                print("error usuario y contraseña")
                 print(error!)
             }
         }
