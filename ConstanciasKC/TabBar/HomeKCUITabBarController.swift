@@ -24,8 +24,7 @@ class HomeKCUITabBarController: UITabBarController {
         
     }
     func HomeTabBarSetup(){
-        vcCertificate.navigationItem.largeTitleDisplayMode = .automatic
-        vcAddStudent.navigationItem.largeTitleDisplayMode = .automatic
+       
         
         let certfNav = UINavigationController(rootViewController: vcCertificate)
         let addStudentNav = UINavigationController(rootViewController: vcAddStudent)
