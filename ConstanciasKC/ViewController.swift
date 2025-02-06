@@ -25,6 +25,8 @@ class ViewController: UIViewController {
         addComponetsKC()
         setupConstraintsKC()
         viewLoginKC.loginKCDelegate = self
+        
+
     }
     func addComponetsKC() {
         view.addSubview(viewLoginKC)

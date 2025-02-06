@@ -31,3 +31,10 @@ struct CertificateDataRequest: Codable {
     var primerApellido: String?
     var segundoApellido: String?
 }
+struct CertificateDataTable : Codable {
+    var nombres: String?
+    var primerApellido: String?
+    var segundoApellido: String?
+    var curp: String?
+
+}

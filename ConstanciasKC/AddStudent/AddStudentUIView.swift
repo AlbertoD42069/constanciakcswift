@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AddStudentProtocol: AnyObject {
-    func addStudent()
+    func addStudent(data: AddstrudentData)
 }
 
 class AddStudentUIView: UIView {
@@ -109,6 +109,7 @@ class AddStudentUIView: UIView {
         txt.layer.cornerRadius = 4
         txt.layer.borderWidth = 0.5
         txt.setLeftPaddingPoints(10)
+        txt.font = UIFont(name: "robotolight", size: 12)
         return txt
     }()
     private let curpText: UITextField = {
@@ -143,14 +144,16 @@ class AddStudentUIView: UIView {
         txt.setLeftPaddingPoints(10)
         return txt
     }()
-    private let nombresText: UITextField = {
+    private var nombresText: UITextField = {
         let txt = UITextField()
         txt.translatesAutoresizingMaskIntoConstraints = false
         txt.layer.cornerRadius = 4
         txt.layer.borderWidth = 0.5
+        txt.font = UIFont(name: "robotolight", size: 12)
         txt.setLeftPaddingPoints(10)
         return txt
     }()
+   
     private let primerApellidoText: UITextField = {
         let txt = UITextField()
         txt.translatesAutoresizingMaskIntoConstraints = false
@@ -178,7 +181,8 @@ class AddStudentUIView: UIView {
         btn.addTarget(self, action: #selector(addStudentKC), for: .touchUpInside)
         return btn
     }()
-
+    var delegate: AddStudentProtocol?
+    var addStudData = AddstrudentData()
      
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -189,9 +193,7 @@ class AddStudentUIView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    @objc func addStudentKC(){
-        
-    }
+   
     func addComponentsForm(){
         
         addSubview(viewCertfKC)
@@ -302,5 +304,23 @@ class AddStudentUIView: UIView {
             addStudentBtn.leadingAnchor.constraint(equalTo: viewCertfKC.leadingAnchor, constant: 20),
             addStudentBtn.trailingAnchor.constraint(equalTo: viewCertfKC.trailingAnchor, constant: -20),
         ])
+    }
+    @objc func addStudentKC(){
+        
+        var dateKC = Date().formattedDate
+        var timeKC = Date().formattedDateTime
+        
+        addStudData.nombres = nombresText.text ?? ""
+        addStudData.primerApellido = primerApellidoText.text ?? ""
+        addStudData.segundoApellido = segundoApellidoText.text ?? ""
+        addStudData.fechaNacimiento = fechaNacimientoText.text ?? ""
+        addStudData.matricula = matriculaText.text ?? ""
+        addStudData.curp = curpText.text ?? ""
+        addStudData.grado = gradoText.text ?? ""
+        addStudData.cicloEscolar = cicloEscolarText.text ?? ""
+        addStudData.fechaExpedicion = dateKC
+        addStudData.horaExpedicion = timeKC
+              
+        delegate?.addStudent(data: addStudData)
     }
 }

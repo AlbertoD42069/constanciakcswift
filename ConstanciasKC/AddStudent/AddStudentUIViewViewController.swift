@@ -20,6 +20,7 @@ class AddStudentUIViewViewController: UIViewController {
         addComponetsKC()
         setupConstraintsKC()
         self.navigationController?.isNavigationBarHidden = true
+        viewCertificateKC.delegate = self
 
         // Do any additional setup after loading the view.
     }
@@ -53,4 +54,11 @@ class AddStudentUIViewViewController: UIViewController {
     }
     */
 
+}
+extension AddStudentUIViewViewController: AddStudentProtocol {
+    func addStudent(data: AddstrudentData) {
+        print("------\(data)")
+    }
+    
+    
 }
