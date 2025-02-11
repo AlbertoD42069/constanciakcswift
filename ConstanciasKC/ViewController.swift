@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     private let viewModel = ViewModel()
     private var certificateData: [CertificateData] = []
     private var certificateDataRequest: [CertificateDataRequest] = []
+    private let collectionKC = CollectionKC.shared.collectionsKC
+
     
     private let viewLoginKC: LoginUIView = {
         let view = LoginUIView()
@@ -24,7 +26,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         addComponetsKC()
         setupConstraintsKC()
+        getDataStudents()
         viewLoginKC.loginKCDelegate = self
+        
         
 
     }
@@ -41,7 +45,7 @@ class ViewController: UIViewController {
     }
     
     func getDataStudents() {
-        viewModel.getCertificate(coleccion: "alumnosKC") { certificate in
+        viewModel.getCertificate(coleccion: collectionKC) { certificate in
             self.certificateData = certificate
             print(self.certificateData)
             let certDataRequest = self.certificateData.map{
