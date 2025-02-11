@@ -8,22 +8,28 @@
 import UIKit
 
 class CertificateUIViewViewController: UIViewController {
-
+    
+    private let certificateView: CertificateUIView = {
+        let view = CertificateUIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        addComponetsKC()
+        setupConstraintsKC()
+        
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func addComponetsKC() {
+        view.addSubview(certificateView)
     }
-    */
-
+    func setupConstraintsKC() {
+        NSLayoutConstraint.activate([
+            certificateView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            certificateView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            certificateView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            certificateView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+        ])
+    }
 }

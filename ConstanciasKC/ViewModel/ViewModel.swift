@@ -7,20 +7,34 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseAuth
+/*
+enum RpviderType: String {
+    case basic
+}
+ */
 
 class ViewModel {
     private let dbKindeC = Firestore.firestore()
-    private (set) var certificateData = [CertificateData]()
+    private var certificateData = [CertificateData]()
     func getCertificate(coleccion: String, succes: @escaping(_ certificate:[CertificateData])-> () ) {
-        let sugerencias = dbKindeC.collection(coleccion)
-        sugerencias.addSnapshotListener { querySnapshot, error in
+        let certificate = dbKindeC.collection(coleccion)
+        certificate.addSnapshotListener { querySnapshot, error in
             guard let document = querySnapshot?.documents else { return }
             self.certificateData = document.compactMap{
                 try? $0.data(as: CertificateData.self)
             }
             succes(self.certificateData)
-            
         }
     }
-
+    func userAuthKC(user: String, password: String){
+        Auth.auth().signIn(withEmail: user, password: password) { (result, error) in
+            if let result = result, error == nil{
+                print("inicio de sesion correcto con usuario \(result.user.email!)")
+            }else {
+                print("error usuario y contraseña")
+                print(error!)
+            }
+        }
+    }
 }
