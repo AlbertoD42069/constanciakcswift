@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     private var certificateData: [CertificateData] = []
     private var certificateDataRequest: [CertificateDataRequest] = []
     private let collectionKC = CollectionKC.shared.collectionsKC
-
     
     private let viewLoginKC: LoginUIView = {
         let view = LoginUIView()
@@ -28,9 +27,6 @@ class ViewController: UIViewController {
         setupConstraintsKC()
         getDataStudents()
         viewLoginKC.loginKCDelegate = self
-        
-        
-
     }
     func addComponetsKC() {
         view.addSubview(viewLoginKC)
@@ -43,29 +39,8 @@ class ViewController: UIViewController {
             viewLoginKC.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
     }
-    
     func getDataStudents() {
-        viewModel.getCertificate(coleccion: collectionKC) { certificate in
-            self.certificateData = certificate
-            print(self.certificateData)
-            let certDataRequest = self.certificateData.map{
-                CertificateDataRequest(
-                    cicloEscolar: $0.cicloEscolar,
-                    curp: $0.curp,
-                    fechaExpedicion: $0.fechaExpedicion,
-                    fechaNacimiento: $0.fechaNacimiento,
-                    grado: $0.grado,
-                    horaExpedicion: $0.horaExpedicion,
-                    matricula: $0.matricula,
-                    nombres: $0.nombres,
-                    primerApellido: $0.primerApellido,
-                    segundoApellido: $0.segundoApellido
-                )
-            }
-            self.certificateDataRequest = certDataRequest
-            print("----------- \(self.certificateDataRequest)")
-        }
-
+        viewModel.getCertificate()
     }
 }
 

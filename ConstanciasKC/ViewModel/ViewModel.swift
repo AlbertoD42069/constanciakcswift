@@ -17,16 +17,28 @@ enum RpviderType: String {
 class ViewModel {
     private let dbKindeC = Firestore.firestore()
     private var certificateData = [CertificateData]()
-    
     private let firebaseServices = FirebaseServices()
-    func getCertificate(coleccion: String, succes: @escaping(_ certificate:[CertificateData])-> () ) {
-        let certificate = dbKindeC.collection(coleccion)
-        certificate.addSnapshotListener { querySnapshot, error in
-            guard let document = querySnapshot?.documents else { return }
-            self.certificateData = document.compactMap{
-                try? $0.data(as: CertificateData.self)
+    private var certificateDataRequest: [CertificateDataRequest] = []
+
+    func getCertificate(){
+        let collectionKCShared = CollectionKC.shared.collectionsKC
+        firebaseServices.getCertificateCollection(coleccion: collectionKCShared) { certificate in
+            let certificateRequestData = certificate.map {
+                CertificateDataRequest (
+                    cicloEscolar: $0.cicloEscolar,
+                    curp: $0.curp,
+                    fechaExpedicion: $0.fechaExpedicion,
+                    fechaNacimiento: $0.fechaNacimiento,
+                    grado: $0.grado,
+                    horaExpedicion: $0.horaExpedicion,
+                    matricula: $0.matricula,
+                    nombres: $0.nombres,
+                    primerApellido: $0.primerApellido,
+                    segundoApellido: $0.segundoApellido
+                )
             }
-            succes(self.certificateData)
+            self.certificateDataRequest = certificateRequestData
+            print("-----------*****\(self.certificateDataRequest)")
         }
     }
     func userAuthKC(user: String, password: String){

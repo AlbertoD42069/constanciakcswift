@@ -13,7 +13,7 @@ class FirebaseServices {
     private let dbKC = Firestore.firestore()
     private var certificateData = [CertificateData]()
     
-    func getCertificateData(coleccion: String, succes: @escaping(_ certificate:[CertificateData])-> () ) {
+    func getCertificateCollection(coleccion: String, succes: @escaping(_ certificate:[CertificateData])-> () ) {
         let certificates = dbKC.collection(coleccion)
         certificates.addSnapshotListener { querySnapshot, error in
             guard let document = querySnapshot?.documents else { return }
@@ -53,15 +53,8 @@ class FirebaseServices {
             }
             
         }
-            
-            //.setData([addData.title : "\(addData.id)"] , merge: true){ err in
-            
-        //if let err = err {
-          //      print("Archivo: \(err) no añadido a pelicula")
-            //}else {
-              //  print("Archivo añadido a peliculas")
-            //}
     }
+    
     func userAuthKC(user: String, password: String){
         Auth.auth().signIn(withEmail: user, password: password) { (result, error) in
             if let result = result, error == nil{
