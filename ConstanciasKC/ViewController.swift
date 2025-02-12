@@ -47,8 +47,12 @@ class ViewController: UIViewController {
 extension ViewController: LoginProtocol {
     func login(userName: String, password: String) {
         let vcHomeKC = HomeKCUITabBarController()
-        viewModel.userAuthKC(user: userName, password: password)
-        self.navigationController?.pushViewController(vcHomeKC, animated: true)
+        let userKCCorrect = viewModel.AuthKC(user: userName, password: password)
+        if userKCCorrect {
+            self.navigationController?.pushViewController(vcHomeKC, animated: true)
+        }else {
+            print("error")
+        }
     }
     
 }

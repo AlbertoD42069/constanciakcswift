@@ -25,7 +25,8 @@ class FirebaseServices {
     }
     func setStudent(addData: AddStudentData) {
         
-        guard let nameStudent = addData.nombres else {
+        let documentID = addData.curp
+        guard let nameStudent = documentID else {
             return
         }
     
@@ -51,11 +52,10 @@ class FirebaseServices {
             }else {
                 print("Alumno agregado de forma correcta")
             }
-            
         }
     }
     
-    func userAuthKC(user: String, password: String){
+    func userAuth(user: String, password: String){
         Auth.auth().signIn(withEmail: user, password: password) { (result, error) in
             if let result = result, error == nil{
                 print("inicio de sesion correcto con usuario \(result.user.email!)")

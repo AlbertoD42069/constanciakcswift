@@ -41,15 +41,15 @@ class ViewModel {
             print("-----------*****\(self.certificateDataRequest)")
         }
     }
-    func userAuthKC(user: String, password: String){
-        Auth.auth().signIn(withEmail: user, password: password) { (result, error) in
-            if let result = result, error == nil{
-                print("inicio de sesion correcto con usuario \(result.user.email!)")
-            }else {
-                print("error usuario y contraseña")
-                print(error!)
-            }
+    func AuthKC(user: String?, password: String?) -> Bool {
+        var correctIsUser : Bool = false
+        if let userKC = user, let passKC = password {
+            firebaseServices.userAuth(user: userKC, password: passKC)
+            correctIsUser = true
+        }else {
+            correctIsUser = false
         }
+        return correctIsUser
     }
     func addStudentData (data: AddStudentData){
         firebaseServices.setStudent(addData: data)
