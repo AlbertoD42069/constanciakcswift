@@ -38,7 +38,6 @@ class ViewModel {
                 )
             }
             self.certificateDataRequest = certificateRequestData
-            print("-----------*****\(self.certificateDataRequest)")
         }
     }
     func AuthKC(user: String?, password: String?) -> Bool {
@@ -53,6 +52,9 @@ class ViewModel {
     }
     func addStudentData (data: AddStudentData){
         firebaseServices.setStudent(addData: data)
+    }
+    func userKCSignOut() {
+        firebaseServices.userSignOut()
     }
     
 }

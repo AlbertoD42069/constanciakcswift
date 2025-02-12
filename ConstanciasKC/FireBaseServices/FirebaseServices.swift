@@ -64,7 +64,7 @@ class FirebaseServices {
             }
         }
     }
-    func logoutUser(){
+    func userSignOut(){
         do {
             try Auth.auth().signOut()
         } catch let signOutError as NSError {
