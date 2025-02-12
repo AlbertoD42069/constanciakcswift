@@ -17,6 +17,8 @@ enum RpviderType: String {
 class ViewModel {
     private let dbKindeC = Firestore.firestore()
     private var certificateData = [CertificateData]()
+    
+    private let firebaseServices = FirebaseServices()
     func getCertificate(coleccion: String, succes: @escaping(_ certificate:[CertificateData])-> () ) {
         let certificate = dbKindeC.collection(coleccion)
         certificate.addSnapshotListener { querySnapshot, error in
@@ -37,4 +39,8 @@ class ViewModel {
             }
         }
     }
+    func addStudentData (data: AddStudentData){
+        firebaseServices.setStudent(addData: data)
+    }
+    
 }

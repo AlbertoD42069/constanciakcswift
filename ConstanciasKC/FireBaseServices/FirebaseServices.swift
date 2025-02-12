@@ -23,11 +23,44 @@ class FirebaseServices {
             succes(self.certificateData)
         }
     }
-    func setStudent(addData: AddstrudentData) {
-        guard let nameStudent = addData.nombres else { return }
-        //dbKC.collection(<#T##collectionPath: String##String#>)
+    func setStudent(addData: AddStudentData) {
         
+        guard let nameStudent = addData.nombres else {
+            return
+        }
+    
+        let collectionKCShared = CollectionKC.shared.collectionsKC
+        let collectionKC = dbKC.collection(collectionKCShared)
+        let documentKc = collectionKC.document(nameStudent)
         
+        documentKc.setData([
+            "cicloEscolar": addData.cicloEscolar!,
+            "curp": addData.curp!,
+            "fechaExpedicion": addData.fechaExpedicion!,
+            "fechaNacimiento": addData.fechaNacimiento!,
+            "grado": addData.grado!,
+            "horaExpedicion": addData.horaExpedicion!,
+            "matricula": addData.matricula!,
+            "nombres": addData.nombres!,
+            "primerApellido" : addData.primerApellido!,
+            "segundoApellido" : addData.segundoApellido!,
+            
+        ]){ err in
+            if let err = err {
+                print("Error: \(err) al añadir el alumno.")
+            }else {
+                print("Alumno agregado de forma correcta")
+            }
+            
+        }
+            
+            //.setData([addData.title : "\(addData.id)"] , merge: true){ err in
+            
+        //if let err = err {
+          //      print("Archivo: \(err) no añadido a pelicula")
+            //}else {
+              //  print("Archivo añadido a peliculas")
+            //}
     }
     func userAuthKC(user: String, password: String){
         Auth.auth().signIn(withEmail: user, password: password) { (result, error) in

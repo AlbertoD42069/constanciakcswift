@@ -14,6 +14,7 @@ class AddStudentUIViewViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    private let viewModel = ViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,9 +57,7 @@ class AddStudentUIViewViewController: UIViewController {
 
 }
 extension AddStudentUIViewViewController: AddStudentProtocol {
-    func addStudent(data: AddstrudentData) {
-        print("------\(data)")
+    func addStudent(data: AddStudentData) {
+        viewModel.addStudentData(data: data)
     }
-    
-    
 }

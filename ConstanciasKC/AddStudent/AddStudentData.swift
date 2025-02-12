@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct AddstrudentData: Codable {
+struct AddStudentData: Codable {
     var cicloEscolar: String?
     var curp: String?
     var fechaExpedicion: String?

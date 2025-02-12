@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AddStudentProtocol: AnyObject {
-    func addStudent(data: AddstrudentData)
+    func addStudent(data: AddStudentData)
 }
 
 class AddStudentUIView: UIView {
@@ -182,7 +182,7 @@ class AddStudentUIView: UIView {
         return btn
     }()
     var delegate: AddStudentProtocol?
-    var addStudData = AddstrudentData()
+    var addStudData = AddStudentData()
      
     override init(frame: CGRect) {
         super.init(frame: frame)
