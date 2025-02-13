@@ -9,8 +9,9 @@ import UIKit
 
 class HomeKCUITabBarController: UITabBarController {
     
-    let vcCertificate = CertificateUIViewViewController()
+    let vcCertificate = CertificateViewController()
     let vcAddStudent = AddStudentUIViewViewController()
+    let navBar = UINavigationController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +21,7 @@ class HomeKCUITabBarController: UITabBarController {
         // Do any additional setup after loading the view.
     }
     func navBarSetup(){
-        self.navigationItem.setHidesBackButton(true, animated: false)
+        self.navigationItem.setHidesBackButton(false, animated: false)
         
     }
     func HomeTabBarSetup(){

@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         addComponetsKC()
         setupConstraintsKC()
-        getDataStudents()
+        //getDataStudents()
         viewLoginKC.loginKCDelegate = self
     }
     func addComponetsKC() {
@@ -39,9 +39,7 @@ class ViewController: UIViewController {
             viewLoginKC.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
     }
-    func getDataStudents() {
-        viewModel.getCertificate()
-    }
+     
 }
 
 extension ViewController: LoginProtocol {

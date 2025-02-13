@@ -20,7 +20,7 @@ class ViewModel {
     private let firebaseServices = FirebaseServices()
     private var certificateDataRequest: [CertificateDataRequest] = []
 
-    func getCertificate(){
+    func getCertificate() -> [CertificateDataRequest] {
         let collectionKCShared = CollectionKC.shared.collectionsKC
         firebaseServices.getCertificateCollection(coleccion: collectionKCShared) { certificate in
             let certificateRequestData = certificate.map {
@@ -39,6 +39,7 @@ class ViewModel {
             }
             self.certificateDataRequest = certificateRequestData
         }
+        return self.certificateDataRequest
     }
     func AuthKC(user: String?, password: String?) -> Bool {
         var correctIsUser : Bool = false
