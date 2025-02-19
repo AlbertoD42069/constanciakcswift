@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseFirestore
+
 
 class CertificateUIView: UIView {
     private let viewCertfKC : UIView = {
@@ -19,12 +21,20 @@ class CertificateUIView: UIView {
         table.register(CertTableViewCell.self, forCellReuseIdentifier: CertTableViewCell.identifier)
         return table
     }()
+    
+    private let viewModel: ViewModel = ViewModel()
+    var certificateData: [CertificateData] = []
+
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         certTableView.dataSource = self
         certTableView.delegate = self
         addComponetsKC()
         setupConstraintsKC()
+        viewModel.getCertificate(collection: "alumnosKC")
+        viewModel.delegate = self
+        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -46,7 +56,17 @@ class CertificateUIView: UIView {
             certTableView.bottomAnchor.constraint(equalTo: viewCertfKC.bottomAnchor),
         ])
     }
-    
+    /*
+    func getDataStudents() {
+        viewModel.getCertificate(collection: "alumnosKC")
+        certificateData = viewModel.certificateData
+        print(certificateData)
+        }*/
+}
+extension CertificateUIView: viewModelProtocol {
+    func getCerftData(cerftData: [CertificateData]) {
+        certificateData = cerftData
+    }
 }
 extension CertificateUIView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

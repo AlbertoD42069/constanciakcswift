@@ -15,7 +15,6 @@ class CertTableViewCell: UITableViewCell {
         lbl.font = UIFont.systemFont(ofSize: 18)
         lbl.textColor = .black
         lbl.textAlignment = .left
-        lbl.text = "alumno"
         return lbl
     }()
     private let studentCURPKC: UILabel = {
@@ -24,7 +23,6 @@ class CertTableViewCell: UITableViewCell {
         lbl.font = UIFont.systemFont(ofSize: 18)
         lbl.textColor = .black
         lbl.textAlignment = .left
-        lbl.text = "curp"
         return lbl
     }()
     

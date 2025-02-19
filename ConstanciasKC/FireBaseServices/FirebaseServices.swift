@@ -13,7 +13,7 @@ class FirebaseServices {
     private let dbKC = Firestore.firestore()
     private var certificateData = [CertificateData]()
     
-    func getCertificateCollection(coleccion: String, succes: @escaping(_ certificate:[CertificateData])-> () ) {
+    func getCertificateCollection(coleccion: String, succes: @escaping(_ certificate : [CertificateData])-> () ) {
         let certificates = dbKC.collection(coleccion)
         certificates.addSnapshotListener { querySnapshot, error in
             guard let document = querySnapshot?.documents else { return }

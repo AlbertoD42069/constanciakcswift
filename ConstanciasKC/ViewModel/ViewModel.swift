@@ -8,38 +8,22 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseAuth
-/*
-enum RpviderType: String {
-    case basic
+protocol viewModelProtocol: AnyObject {
+    func getCerftData(cerftData: [CertificateData])
 }
- */
-
 class ViewModel {
     private let dbKindeC = Firestore.firestore()
-    private var certificateData = [CertificateData]()
+    var certificateData = [CertificateData]()
     private let firebaseServices = FirebaseServices()
     private var certificateDataRequest: [CertificateDataRequest] = []
-
-    func getCertificate() -> [CertificateDataRequest] {
-        let collectionKCShared = CollectionKC.shared.collectionsKC
-        firebaseServices.getCertificateCollection(coleccion: collectionKCShared) { certificate in
-            let certificateRequestData = certificate.map {
-                CertificateDataRequest (
-                    cicloEscolar: $0.cicloEscolar,
-                    curp: $0.curp,
-                    fechaExpedicion: $0.fechaExpedicion,
-                    fechaNacimiento: $0.fechaNacimiento,
-                    grado: $0.grado,
-                    horaExpedicion: $0.horaExpedicion,
-                    matricula: $0.matricula,
-                    nombres: $0.nombres,
-                    primerApellido: $0.primerApellido,
-                    segundoApellido: $0.segundoApellido
-                )
+    
+    var delegate : viewModelProtocol?
+    
+    func getCertificate(collection: String) {
+        firebaseServices.getCertificateCollection(coleccion: collection) { certificate in
+            self.certificateData = certificate
+            self.delegate?.getCerftData(cerftData: self.certificateData)
             }
-            self.certificateDataRequest = certificateRequestData
-        }
-        return self.certificateDataRequest
     }
     func AuthKC(user: String?, password: String?) -> Bool {
         var correctIsUser : Bool = false

@@ -18,6 +18,19 @@ struct CertificateData: Codable {
     var nombres: String?
     var primerApellido: String?
     var segundoApellido: String?
+    
+    init(cicloEscolar: String? = nil, curp: String? = nil, fechaExpedicion: String? = nil, fechaNacimiento: String? = nil, grado: String? = nil, horaExpedicion: String? = nil, matricula: String? = nil, nombres: String? = nil, primerApellido: String? = nil, segundoApellido: String? = nil) {
+        self.cicloEscolar = cicloEscolar
+        self.curp = curp
+        self.fechaExpedicion = fechaExpedicion
+        self.fechaNacimiento = fechaNacimiento
+        self.grado = grado
+        self.horaExpedicion = horaExpedicion
+        self.matricula = matricula
+        self.nombres = nombres
+        self.primerApellido = primerApellido
+        self.segundoApellido = segundoApellido
+    }
 }
 struct CertificateDataRequest: Codable {
     var cicloEscolar: String?

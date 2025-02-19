@@ -10,10 +10,10 @@ import FirebaseFirestore
 import FirebaseAuth
 
 class ViewController: UIViewController {
-    private let viewModel = ViewModel()
     private var certificateData: [CertificateData] = []
     private var certificateDataRequest: [CertificateDataRequest] = []
     private let collectionKC = CollectionKC.shared.collectionsKC
+    private let viewModel = ViewModel()
     
     private let viewLoginKC: LoginUIView = {
         let view = LoginUIView()
