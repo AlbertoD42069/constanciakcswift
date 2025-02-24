@@ -8,6 +8,10 @@
 import UIKit
 import FirebaseFirestore
 
+protocol cefrtNavProtocol: AnyObject {
+    func goToNavDetails(modelKC: CertificateData)
+}
+
 class CertificateUIView: UIView {
     private let viewCertfKC : UIView = {
         let view = UIView()
@@ -23,7 +27,6 @@ class CertificateUIView: UIView {
     
     private let viewModel: ViewModel = ViewModel()
     var certificateData: [CertificateData] = []
-    var certificateDataTable: [CertificateDataTable] = []
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -54,8 +57,6 @@ class CertificateUIView: UIView {
             certTableView.bottomAnchor.constraint(equalTo: viewCertfKC.bottomAnchor),
         ])
     }
-    
-   
 }
 extension CertificateUIView: viewModelProtocol {
     func getCerftData(cerftData: [CertificateData]) {
@@ -75,5 +76,10 @@ extension CertificateUIView: UITableViewDelegate, UITableViewDataSource {
         let modelKC = certificateData[indexPath.row]
         cell.setupData(data: modelKC)
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let modelCerft = certificateData[indexPath.row]
+        let vc = StudentDetailsViewController()
+        
     }
 }

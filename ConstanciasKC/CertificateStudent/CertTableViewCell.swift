@@ -9,6 +9,24 @@ import UIKit
 
 class CertTableViewCell: UITableViewCell {
     
+    private let studentNameKCLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.text = "Nombre:"
+        lbl.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        lbl.textColor = .black
+        lbl.textAlignment = .center
+        return lbl
+    }()
+    private let studentCURPKCLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.text = "Curp:"
+        lbl.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        lbl.textColor = .black
+        lbl.textAlignment = .center
+        return lbl
+    }()
     private let studentNameKC: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -39,21 +57,30 @@ class CertTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     func addcomponets(){
+        addSubview(studentNameKCLbl)
+        addSubview(studentCURPKCLbl)
         addSubview(studentNameKC)
         addSubview(studentCURPKC)
     }
     func setupViewContainter(){
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: 80),
-            studentNameKC.leadingAnchor.constraint(equalTo: leadingAnchor),
-            studentNameKC.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            heightAnchor.constraint(equalToConstant: 150),
             
-            studentCURPKC.topAnchor.constraint(equalTo: studentNameKC.bottomAnchor, constant: 10),
+            studentNameKCLbl.leadingAnchor.constraint(equalTo: leadingAnchor),
+            studentNameKCLbl.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+
+            studentNameKC.leadingAnchor.constraint(equalTo: leadingAnchor),
+            studentNameKC.topAnchor.constraint(equalTo: studentNameKCLbl.bottomAnchor, constant: 10),
+            
+            studentCURPKCLbl.leadingAnchor.constraint(equalTo: leadingAnchor),
+            studentCURPKCLbl.topAnchor.constraint(equalTo: studentNameKC.bottomAnchor, constant: 10),
+
+            studentCURPKC.topAnchor.constraint(equalTo: studentCURPKCLbl.bottomAnchor, constant: 10),
             studentCURPKC.leadingAnchor.constraint(equalTo: leadingAnchor),
         ])
     }
     func setupData(data: CertificateData) {
-        studentNameKC.text = "Nombre: \(data.nombres ?? "error")"
-        studentCURPKC.text = "CURP: \(data.curp ?? "error")"
+        studentNameKC.text = data.nombres ?? "error"
+        studentCURPKC.text = data.curp ?? "error"
     }
 }

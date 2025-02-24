@@ -14,9 +14,8 @@ class CertificateViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
     private let viewModel: ViewModel = ViewModel()
-    //var certificateData: [CertificateData] = []
-    //private var certificateDataRequest = CertificateDataRequest()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +24,7 @@ class CertificateViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //viewModel.delegate = self
-        //viewModel.getCertificate(collection: "alumnosKC")
+        
     }
     func addComponetsKC() {
         view.addSubview(certificateView)
@@ -41,9 +39,3 @@ class CertificateViewController: UIViewController {
     }
    
 }
-//extension CertificateViewController : viewModelProtocol {
-//    func getCerftData(cerftData: [CertificateData]) {
-//        certificateData = cerftData
-//        print(certificateData)
-//    }
-//}

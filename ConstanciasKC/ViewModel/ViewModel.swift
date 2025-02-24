@@ -11,6 +11,7 @@ import FirebaseAuth
 protocol viewModelProtocol: AnyObject {
     func getCerftData(cerftData: [CertificateData])
 }
+
 class ViewModel {
     private let dbKindeC = Firestore.firestore()
     var certificateData: [CertificateData] = []
