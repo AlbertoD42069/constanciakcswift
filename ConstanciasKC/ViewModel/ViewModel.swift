@@ -13,7 +13,7 @@ protocol viewModelProtocol: AnyObject {
 }
 class ViewModel {
     private let dbKindeC = Firestore.firestore()
-    var certificateData = [CertificateData]()
+    var certificateData: [CertificateData] = []
     private let firebaseServices = FirebaseServices()
     private var certificateDataRequest: [CertificateDataRequest] = []
     

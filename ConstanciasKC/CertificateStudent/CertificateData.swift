@@ -49,5 +49,12 @@ struct CertificateDataTable : Codable {
     var primerApellido: String?
     var segundoApellido: String?
     var curp: String?
+    
+    init(nombres: String? = nil, primerApellido: String? = nil, segundoApellido: String? = nil, curp: String? = nil) {
+        self.nombres = nombres
+        self.primerApellido = primerApellido
+        self.segundoApellido = segundoApellido
+        self.curp = curp
+    }
 
 }

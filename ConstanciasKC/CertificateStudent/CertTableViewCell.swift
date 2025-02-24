@@ -26,6 +26,8 @@ class CertTableViewCell: UITableViewCell {
         return lbl
     }()
     
+    var certificateData: [CertificateData] = []
+
     static let identifier: String = "CertTableViewCell"
     override init (style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -48,25 +50,10 @@ class CertTableViewCell: UITableViewCell {
             
             studentCURPKC.topAnchor.constraint(equalTo: studentNameKC.bottomAnchor, constant: 10),
             studentCURPKC.leadingAnchor.constraint(equalTo: leadingAnchor),
-
         ])
     }
-
+    func setupData(data: CertificateData) {
+        studentNameKC.text = "Nombre: \(data.nombres ?? "error")"
+        studentCURPKC.text = "CURP: \(data.curp ?? "error")"
+    }
 }
-/*
- required init?(coder: NSCoder) {
-     fatalError("init(coder:) has not been implemented")
- }
- func addcomponets(){
-     addSubview(sugerenciaTxt)
-
- }
- func setupViewContainter(){
-     NSLayoutConstraint.activate([
-         sugerenciaTxt.centerYAnchor.constraint(equalTo: centerYAnchor),
-         sugerenciaTxt.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-
-     ])
- }
-
- */

@@ -17,7 +17,6 @@ class HomeKCUITabBarController: UITabBarController {
         super.viewDidLoad()
         HomeTabBarSetup()
         navBarSetup()
-
         // Do any additional setup after loading the view.
     }
     func navBarSetup(){

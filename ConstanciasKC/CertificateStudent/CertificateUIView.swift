@@ -8,7 +8,6 @@
 import UIKit
 import FirebaseFirestore
 
-
 class CertificateUIView: UIView {
     private let viewCertfKC : UIView = {
         let view = UIView()
@@ -24,20 +23,19 @@ class CertificateUIView: UIView {
     
     private let viewModel: ViewModel = ViewModel()
     var certificateData: [CertificateData] = []
+    var certificateDataTable: [CertificateDataTable] = []
 
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        certTableView.dataSource = self
-        certTableView.delegate = self
+        viewModel.getCertificate(collection: "alumnosKC")
         addComponetsKC()
         setupConstraintsKC()
-        viewModel.getCertificate(collection: "alumnosKC")
         viewModel.delegate = self
-        
+        self.certTableView.dataSource = self
+        self.certTableView.delegate = self
     }
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
     }
     func addComponetsKC() {
         addSubview(viewCertfKC)
@@ -56,27 +54,26 @@ class CertificateUIView: UIView {
             certTableView.bottomAnchor.constraint(equalTo: viewCertfKC.bottomAnchor),
         ])
     }
-    /*
-    func getDataStudents() {
-        viewModel.getCertificate(collection: "alumnosKC")
-        certificateData = viewModel.certificateData
-        print(certificateData)
-        }*/
+    
+   
 }
 extension CertificateUIView: viewModelProtocol {
     func getCerftData(cerftData: [CertificateData]) {
         certificateData = cerftData
+        certificateData = viewModel.certificateData
+        certTableView.reloadData()
     }
 }
 extension CertificateUIView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        let studentCount = certificateData.count
+        return studentCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CertTableViewCell.identifier, for: indexPath) as! CertTableViewCell
+        let modelKC = certificateData[indexPath.row]
+        cell.setupData(data: modelKC)
         return cell
     }
-    
-    
 }
