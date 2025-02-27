@@ -18,9 +18,20 @@ class StudentDetailsViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(certificateData!)
+        addCompnets()
+        setupautolaout()
+        view.backgroundColor = .white
+        studentDetailsView.setupLbl(dataStudent: certificateData!)
     }
-    func setupDetails(dataDetailsKC: CertificateData){
-        print(dataDetailsKC)
+    func addCompnets() {
+        view.addSubview(studentDetailsView)
+    }
+    func setupautolaout() {
+        NSLayoutConstraint.activate([
+            studentDetailsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            studentDetailsView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            studentDetailsView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            studentDetailsView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+        ])
     }
 }
