@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseFirestore
 
-protocol cefrtNavProtocol: AnyObject {
+protocol CefrtNavProtocol: AnyObject {
     func goToNavDetails(modelKC: CertificateData)
 }
 
@@ -27,6 +27,8 @@ class CertificateUIView: UIView {
     
     private let viewModel: ViewModel = ViewModel()
     var certificateData: [CertificateData] = []
+    var delegate: CefrtNavProtocol?
+    
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -79,7 +81,6 @@ extension CertificateUIView: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let modelCerft = certificateData[indexPath.row]
-        let vc = StudentDetailsViewController()
-        
+        delegate?.goToNavDetails(modelKC: modelCerft)
     }
 }

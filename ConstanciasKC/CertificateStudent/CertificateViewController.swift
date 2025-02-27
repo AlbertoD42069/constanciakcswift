@@ -15,12 +15,13 @@ class CertificateViewController: UIViewController {
         return view
     }()
     
-    private let viewModel: ViewModel = ViewModel()
+    private let viewModel = ViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addComponetsKC()
         setupConstraintsKC()
+        certificateView.delegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -37,5 +38,11 @@ class CertificateViewController: UIViewController {
             certificateView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
     }
-   
+}
+extension CertificateViewController: CefrtNavProtocol {
+    func goToNavDetails(modelKC: CertificateData) {
+        let studentDetailsVc = StudentDetailsViewController()
+        studentDetailsVc.certificateData = modelKC
+        self.navigationController?.pushViewController(studentDetailsVc, animated: true)
+    }
 }

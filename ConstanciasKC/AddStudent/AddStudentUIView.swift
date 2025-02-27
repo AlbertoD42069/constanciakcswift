@@ -21,7 +21,7 @@ class AddStudentUIView: UIView {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.text = "Agregar alumno"
-        lbl.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        lbl.font = UIFont.systemFont(ofSize: 13, weight: .bold)
         lbl.textColor = .black
         lbl.textAlignment = .center
         return lbl

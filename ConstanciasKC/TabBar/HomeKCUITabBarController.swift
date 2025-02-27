@@ -11,7 +11,6 @@ class HomeKCUITabBarController: UITabBarController {
     
     let vcCertificate = CertificateViewController()
     let vcAddStudent = AddStudentUIViewViewController()
-    let navBar = UINavigationController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,12 +19,12 @@ class HomeKCUITabBarController: UITabBarController {
         // Do any additional setup after loading the view.
     }
     func navBarSetup(){
-        self.navigationItem.setHidesBackButton(false, animated: false)
-        
+        self.navigationItem.setHidesBackButton(true, animated: false)
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.isNavigationBarHidden = true
     }
     func HomeTabBarSetup(){
        
-        
         let certfNav = UINavigationController(rootViewController: vcCertificate)
         let addStudentNav = UINavigationController(rootViewController: vcAddStudent)
         
@@ -35,21 +34,19 @@ class HomeKCUITabBarController: UITabBarController {
         certfNav.tabBarItem = UITabBarItem(title: "Certificados", image: certIcono, tag: 1)
         addStudentNav.tabBarItem = UITabBarItem(title: "Agregar Alumno", image: addIcono, tag: 2)
         
+        vcCertificate.navigationItem.largeTitleDisplayMode = .automatic
+        vcCertificate.navigationItem.title = "Certificados"
+        vcAddStudent.navigationItem.largeTitleDisplayMode = .automatic
+        vcAddStudent.navigationItem.title = "Agregar Alumno"
+        
+
+
+        
         let items = [certfNav, addStudentNav]
         for nav in items {
             tabBar.barTintColor = .white
         }
         setViewControllers(items, animated: true)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
