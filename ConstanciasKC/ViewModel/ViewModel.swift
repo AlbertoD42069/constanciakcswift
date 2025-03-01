@@ -8,11 +8,6 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseAuth
-/*
-enum RpviderType: String {
-    case basic
-}
- */
 
 class ViewModel {
     private let dbKindeC = Firestore.firestore()
