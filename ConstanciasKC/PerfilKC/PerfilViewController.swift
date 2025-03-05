@@ -8,22 +8,32 @@
 import UIKit
 
 class PerfilViewController: UIViewController {
+    
+    private let perfikKCView: PerfilUiView = {
+        let viewKCperfil = PerfilUiView()
+        viewKCperfil.translatesAutoresizingMaskIntoConstraints = false
+        return viewKCperfil
+    }()
+    
+    private let viewModel = ViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        addComponetsKC()
+        setupConstraints()
+        view.backgroundColor = .white
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func addComponetsKC() {
+        view.addSubview(perfikKCView)
     }
-    */
+    func setupConstraints() {
+        NSLayoutConstraint.activate([
+            perfikKCView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            perfikKCView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            perfikKCView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            perfikKCView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
+    }
 
 }

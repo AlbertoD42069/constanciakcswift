@@ -9,9 +9,9 @@ import UIKit
 
 class HomeKCUITabBarController: UITabBarController {
     
-    let vcCertificate = CertificateViewController()
-    let vcAddStudent = AddStudentUIViewViewController()
-    private let viewModel = ViewModel()
+    private let vcCertificate = CertificateViewController()
+    private let vcAddStudent = AddStudentUIViewViewController()
+    private let vcPerfil = PerfilViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,14 +21,12 @@ class HomeKCUITabBarController: UITabBarController {
     }
     func navBarSetup(){
         let imageLEftBtnCK = UIImage(systemName: "gearshape.fill")
-        let leftBtnCK = UIBarButtonItem(image: imageLEftBtnCK, style: .plain, target: .none, action: #selector(goPerfilKC))
+        let leftBtnCK = UIBarButtonItem(image: imageLEftBtnCK, style: .plain, target: self, action: #selector(goPerfilKC))
         self.navigationItem.setHidesBackButton(true, animated: false)
-        self.navigationController?.navigationBar.isHidden = true
-        self.navigationController?.isNavigationBarHidden = true
-        
+        self.navigationItem.rightBarButtonItem = leftBtnCK
     }
     @objc func goPerfilKC(){
-        
+        navigationController?.pushViewController(vcPerfil, animated: true)
         
     }
     func HomeTabBarSetup(){
