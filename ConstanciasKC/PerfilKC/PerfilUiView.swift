@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol PerfilProtocol: AnyObject {
+    func setEmail() -> String
+}
+
 class PerfilUiView: UIView {
 
     private let viewcontainerKC: UIView = {
@@ -23,6 +27,7 @@ class PerfilUiView: UIView {
     }()
     private let emailKCLbl: UILabel = {
         let email = UILabel()
+        email.textColor = .black
         email.translatesAutoresizingMaskIntoConstraints = false
         return email
     }()
@@ -45,6 +50,8 @@ class PerfilUiView: UIView {
         btn.backgroundColor = .systemBlue
         return btn
     }()
+    
+    var perfilDelegate : PerfilProtocol?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -96,5 +103,8 @@ class PerfilUiView: UIView {
     }
     @objc func logoutKC() {
         print("logout")
+    }
+    func setemail(email: String) {
+        emailKCLbl.text = email
     }
 }

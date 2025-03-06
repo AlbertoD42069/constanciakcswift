@@ -9,18 +9,19 @@ import UIKit
 import FirebaseFirestore
 import FirebaseAuth
 
+
 class ViewController: UIViewController {
     private var certificateData: [CertificateData] = []
     private var certificateDataRequest: [CertificateDataRequest] = []
     private let collectionKC = CollectionKC.shared.collectionsKC
     private let viewModel = ViewModel()
-    
+    private let emailSingleton = EmailKCSingleton.shared
     private let viewLoginKC: LoginUIView = {
         let view = LoginUIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addComponetsKC()
@@ -47,6 +48,7 @@ extension ViewController: LoginProtocol {
         let vcHomeKC = HomeKCUITabBarController()
         let userKCCorrect = viewModel.AuthKC(user: userName, password: password)
         if userKCCorrect {
+            emailSingleton.setEmail(email: userName)
             self.navigationController?.pushViewController(vcHomeKC, animated: true)
         }else {
             print("error")

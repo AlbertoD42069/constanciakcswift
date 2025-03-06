@@ -12,3 +12,11 @@ class CollectionKC {
     var collectionsKC = "alumnosKC"
     private init() {}
 }
+class EmailKCSingleton {
+    static let shared = EmailKCSingleton()
+    var emailKC: String?
+    func setEmail(email: String?) {
+        self.emailKC = email
+    }
+    private init() {}
+}

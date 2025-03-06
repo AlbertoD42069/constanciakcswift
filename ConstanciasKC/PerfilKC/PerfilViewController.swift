@@ -7,6 +7,15 @@
 
 import UIKit
 
+
+struct PerfilData {
+    var email: String?
+    
+    init(email: String? = "") {
+        self.email = email
+    }
+}
+
 class PerfilViewController: UIViewController {
     
     private let perfikKCView: PerfilUiView = {
@@ -14,14 +23,17 @@ class PerfilViewController: UIViewController {
         viewKCperfil.translatesAutoresizingMaskIntoConstraints = false
         return viewKCperfil
     }()
-    
+    var pefilDate = PerfilData()
     private let viewModel = ViewModel()
+    private let email = EmailKCSingleton.shared
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         addComponetsKC()
         setupConstraints()
         view.backgroundColor = .white
+        perfikKCView.setemail(email: email.emailKC ?? "")
     }
     
     func addComponetsKC() {
@@ -35,5 +47,4 @@ class PerfilViewController: UIViewController {
             perfikKCView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
-
 }

@@ -56,13 +56,14 @@ class FirebaseServices {
     }
     
     func userAuth(user: String, password: String){
-        Auth.auth().signIn(withEmail: user, password: password) { (result, error) in
-            if let result = result, error == nil{
-                print("inicio de sesion correcto con usuario \(result.user.email!)")
+        Auth.auth().signIn(withEmail: user, password: password)
+        //{ (result, error) in
+            /*if let result = result, error == nil{
+                result.user.email!
             }else {
                 print(error!)
-            }
-        }
+            }*/
+        //}
     }
     func userSignOut(){
         do {
