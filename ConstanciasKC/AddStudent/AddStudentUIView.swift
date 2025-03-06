@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AddStudentProtocol: AnyObject {
-    func addStudent(data: AddstrudentData)
+    func addStudent(data: AddStudentData)
 }
 
 class AddStudentUIView: UIView {
@@ -21,7 +21,7 @@ class AddStudentUIView: UIView {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.text = "Agregar alumno"
-        lbl.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        lbl.font = UIFont.systemFont(ofSize: 13, weight: .bold)
         lbl.textColor = .black
         lbl.textAlignment = .center
         return lbl
@@ -182,7 +182,11 @@ class AddStudentUIView: UIView {
         return btn
     }()
     var delegate: AddStudentProtocol?
-    var addStudData = AddstrudentData()
+    var addStudData = AddStudentData()
+    
+    
+    var dateKC = Date().formattedDate
+    var timeKC = Date().formattedDateTime
      
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -305,11 +309,20 @@ class AddStudentUIView: UIView {
             addStudentBtn.trailingAnchor.constraint(equalTo: viewCertfKC.trailingAnchor, constant: -20),
         ])
     }
+    func clearInput(){
+        nombresText.text = ""
+        primerApellidoText.text = ""
+        segundoApellidoText.text = ""
+        fechaNacimientoText.text = ""
+        matriculaText.text = ""
+        curpText.text = ""
+        gradoText.text = ""
+        cicloEscolarText.text = ""
+        dateKC = ""
+        timeKC = ""
+    }
     @objc func addStudentKC(){
-        
-        var dateKC = Date().formattedDate
-        var timeKC = Date().formattedDateTime
-        
+                
         addStudData.nombres = nombresText.text ?? ""
         addStudData.primerApellido = primerApellidoText.text ?? ""
         addStudData.segundoApellido = segundoApellidoText.text ?? ""
@@ -322,5 +335,6 @@ class AddStudentUIView: UIView {
         addStudData.horaExpedicion = timeKC
               
         delegate?.addStudent(data: addStudData)
+        clearInput()
     }
 }

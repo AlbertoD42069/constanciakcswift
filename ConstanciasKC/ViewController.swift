@@ -9,24 +9,29 @@ import UIKit
 import FirebaseFirestore
 import FirebaseAuth
 
+
 class ViewController: UIViewController {
-    private let viewModel = ViewModel()
     private var certificateData: [CertificateData] = []
     private var certificateDataRequest: [CertificateDataRequest] = []
-    
+    private let collectionKC = CollectionKC.shared.collectionsKC
+    private let viewModel = ViewModel()
+    private let emailSingleton = EmailKCSingleton.shared
     private let viewLoginKC: LoginUIView = {
         let view = LoginUIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
+    private let vcPerfil = PerfilViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addComponetsKC()
         setupConstraintsKC()
+        //getDataStudents()
         viewLoginKC.loginKCDelegate = self
+        vcPerfil.logoutDelegate = self
         
-
+        view.backgroundColor = .white
     }
     func addComponetsKC() {
         view.addSubview(viewLoginKC)
@@ -39,37 +44,26 @@ class ViewController: UIViewController {
             viewLoginKC.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
     }
-    
-    func getDataStudents() {
-        viewModel.getCertificate(coleccion: "alumnosKC") { certificate in
-            self.certificateData = certificate
-            print(self.certificateData)
-            let certDataRequest = self.certificateData.map{
-                CertificateDataRequest(
-                    cicloEscolar: $0.cicloEscolar,
-                    curp: $0.curp,
-                    fechaExpedicion: $0.fechaExpedicion,
-                    fechaNacimiento: $0.fechaNacimiento,
-                    grado: $0.grado,
-                    horaExpedicion: $0.horaExpedicion,
-                    matricula: $0.matricula,
-                    nombres: $0.nombres,
-                    primerApellido: $0.primerApellido,
-                    segundoApellido: $0.segundoApellido
-                )
-            }
-            self.certificateDataRequest = certDataRequest
-            print("----------- \(self.certificateDataRequest)")
-        }
-
-    }
+     
 }
 
 extension ViewController: LoginProtocol {
     func login(userName: String, password: String) {
         let vcHomeKC = HomeKCUITabBarController()
-        viewModel.userAuthKC(user: userName, password: password)
-        self.navigationController?.pushViewController(vcHomeKC, animated: true)
+        let userKCCorrect = viewModel.AuthKC(user: userName, password: password)
+        if userKCCorrect {
+            emailSingleton.setEmail(email: userName)
+            self.navigationController?.pushViewController(vcHomeKC, animated: true)
+        }else {
+            print("error")
+        }
     }
+    
+}
+extension ViewController: LogoutDelegate {
+    func logout() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     
 }

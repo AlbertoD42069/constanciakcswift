@@ -8,33 +8,39 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseAuth
-/*
-enum RpviderType: String {
-    case basic
+protocol viewModelProtocol: AnyObject {
+    func getCerftData(cerftData: [CertificateData])
 }
- */
 
 class ViewModel {
     private let dbKindeC = Firestore.firestore()
-    private var certificateData = [CertificateData]()
-    func getCertificate(coleccion: String, succes: @escaping(_ certificate:[CertificateData])-> () ) {
-        let certificate = dbKindeC.collection(coleccion)
-        certificate.addSnapshotListener { querySnapshot, error in
-            guard let document = querySnapshot?.documents else { return }
-            self.certificateData = document.compactMap{
-                try? $0.data(as: CertificateData.self)
+    var certificateData: [CertificateData] = []
+    private let firebaseServices = FirebaseServices()
+    private var certificateDataRequest: [CertificateDataRequest] = []
+    
+    var delegate : viewModelProtocol?
+    
+    func getCertificate(collection: String) {
+        firebaseServices.getCertificateCollection(coleccion: collection) { certificate in
+            self.certificateData = certificate
+            self.delegate?.getCerftData(cerftData: self.certificateData)
             }
-            succes(self.certificateData)
-        }
     }
-    func userAuthKC(user: String, password: String){
-        Auth.auth().signIn(withEmail: user, password: password) { (result, error) in
-            if let result = result, error == nil{
-                print("inicio de sesion correcto con usuario \(result.user.email!)")
-            }else {
-                print("error usuario y contraseña")
-                print(error!)
-            }
+    func AuthKC(user: String?, password: String?) -> Bool {
+        var correctIsUser : Bool = false
+        if let userKC = user, let passKC = password {
+            firebaseServices.userAuth(user: userKC, password: passKC)
+            correctIsUser = true
+        }else {
+            correctIsUser = false
         }
+        return correctIsUser
     }
+    func addStudentData (data: AddStudentData){
+        firebaseServices.setStudent(addData: data)
+    }
+    func userKCSignOut(){
+        firebaseServices.userSignOut()
+    }
+    
 }

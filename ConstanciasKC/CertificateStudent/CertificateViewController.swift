@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CertificateUIViewViewController: UIViewController {
+class CertificateViewController: UIViewController {
     
     private let certificateView: CertificateUIView = {
         let view = CertificateUIView()
@@ -15,10 +15,16 @@ class CertificateUIViewViewController: UIViewController {
         return view
     }()
     
+    private let viewModel = ViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addComponetsKC()
         setupConstraintsKC()
+        certificateView.delegate = self
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
     }
     func addComponetsKC() {
@@ -31,5 +37,12 @@ class CertificateUIViewViewController: UIViewController {
             certificateView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             certificateView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
+    }
+}
+extension CertificateViewController: CefrtNavProtocol {
+    func goToNavDetails(modelKC: CertificateData) {
+        let studentDetailsVc = StudentDetailsViewController()
+        studentDetailsVc.certificateData = modelKC
+        self.navigationController?.pushViewController(studentDetailsVc, animated: true)
     }
 }

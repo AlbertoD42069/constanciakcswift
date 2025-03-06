@@ -9,47 +9,42 @@ import UIKit
 
 class HomeKCUITabBarController: UITabBarController {
     
-    let vcCertificate = CertificateUIViewViewController()
-    let vcAddStudent = AddStudentUIViewViewController()
+    private let vcCertificate = CertificateViewController()
+    private let vcAddStudent = AddStudentUIViewViewController()
+    private let vcPerfil = PerfilViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         HomeTabBarSetup()
-        navBarSetup()
-
-        // Do any additional setup after loading the view.
-    }
-    func navBarSetup(){
         self.navigationItem.setHidesBackButton(true, animated: false)
-        
+       
     }
     func HomeTabBarSetup(){
        
-        
         let certfNav = UINavigationController(rootViewController: vcCertificate)
         let addStudentNav = UINavigationController(rootViewController: vcAddStudent)
+        let perfilNav = UINavigationController(rootViewController: vcPerfil)
         
         let certIcono = UIImage(systemName: "document")
         let addIcono = UIImage(systemName: "document.badge.plus")
+        let perfilIcono = UIImage(systemName: "person.fill")
         
         certfNav.tabBarItem = UITabBarItem(title: "Certificados", image: certIcono, tag: 1)
         addStudentNav.tabBarItem = UITabBarItem(title: "Agregar Alumno", image: addIcono, tag: 2)
+        perfilNav.tabBarItem = UITabBarItem(title: "perfil", image: perfilIcono, tag: 3)
         
-        let items = [certfNav, addStudentNav]
+        vcCertificate.navigationItem.largeTitleDisplayMode = .automatic
+        vcCertificate.navigationItem.title = "Certificados"
+        vcAddStudent.navigationItem.largeTitleDisplayMode = .automatic
+        vcAddStudent.navigationItem.title = "Agregar Alumno"
+        vcPerfil.navigationItem.largeTitleDisplayMode = .automatic
+        vcPerfil.navigationItem.title = "Perfil"
+        
+        let items = [certfNav, addStudentNav, perfilNav]
         for nav in items {
             tabBar.barTintColor = .white
         }
         setViewControllers(items, animated: true)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
