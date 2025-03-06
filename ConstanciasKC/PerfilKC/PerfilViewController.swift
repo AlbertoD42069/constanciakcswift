@@ -8,6 +8,10 @@
 import UIKit
 
 
+protocol LogoutDelegate: AnyObject {
+    func logout()
+}
+
 struct PerfilData {
     var email: String?
     
@@ -26,6 +30,7 @@ class PerfilViewController: UIViewController {
     var pefilDate = PerfilData()
     private let viewModel = ViewModel()
     private let email = EmailKCSingleton.shared
+    var logoutDelegate: LogoutDelegate?
     
 
     override func viewDidLoad() {
@@ -53,7 +58,6 @@ extension PerfilViewController: PerfilProtocol {
     func logout() {
         print("cerrar sesion")
         viewModel.userKCSignOut()
-        let loginVC = ViewController()
-        navigationController?.popToRootViewController(animated: true)
-    }
+        logoutDelegate?.logout()
+        }
 }

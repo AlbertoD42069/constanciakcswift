@@ -21,6 +21,7 @@ class ViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    private let vcPerfil = PerfilViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,8 @@ class ViewController: UIViewController {
         setupConstraintsKC()
         //getDataStudents()
         viewLoginKC.loginKCDelegate = self
+        vcPerfil.logoutDelegate = self
+        
         view.backgroundColor = .white
     }
     func addComponetsKC() {
@@ -55,5 +58,12 @@ extension ViewController: LoginProtocol {
             print("error")
         }
     }
+    
+}
+extension ViewController: LogoutDelegate {
+    func logout() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     
 }
