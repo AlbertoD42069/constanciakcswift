@@ -34,6 +34,7 @@ class PerfilViewController: UIViewController {
         setupConstraints()
         view.backgroundColor = .white
         perfikKCView.setemail(email: email.emailKC ?? "")
+        perfikKCView.perfilDelegate = self
     }
     
     func addComponetsKC() {
@@ -46,5 +47,13 @@ class PerfilViewController: UIViewController {
             perfikKCView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             perfikKCView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
+    }
+}
+extension PerfilViewController: PerfilProtocol {
+    func logout() {
+        print("cerrar sesion")
+        viewModel.userKCSignOut()
+        let loginVC = ViewController()
+        navigationController?.popToRootViewController(animated: true)
     }
 }

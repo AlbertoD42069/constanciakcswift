@@ -16,36 +16,31 @@ class HomeKCUITabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         HomeTabBarSetup()
-        navBarSetup()
-        // Do any additional setup after loading the view.
-    }
-    func navBarSetup(){
-        let imageLEftBtnCK = UIImage(systemName: "gearshape.fill")
-        let leftBtnCK = UIBarButtonItem(image: imageLEftBtnCK, style: .plain, target: self, action: #selector(goPerfilKC))
         self.navigationItem.setHidesBackButton(true, animated: false)
-        self.navigationItem.rightBarButtonItem = leftBtnCK
-    }
-    @objc func goPerfilKC(){
-        navigationController?.pushViewController(vcPerfil, animated: true)
-        
+       
     }
     func HomeTabBarSetup(){
        
         let certfNav = UINavigationController(rootViewController: vcCertificate)
         let addStudentNav = UINavigationController(rootViewController: vcAddStudent)
+        let perfilNav = UINavigationController(rootViewController: vcPerfil)
         
         let certIcono = UIImage(systemName: "document")
         let addIcono = UIImage(systemName: "document.badge.plus")
+        let perfilIcono = UIImage(systemName: "person.fill")
         
         certfNav.tabBarItem = UITabBarItem(title: "Certificados", image: certIcono, tag: 1)
         addStudentNav.tabBarItem = UITabBarItem(title: "Agregar Alumno", image: addIcono, tag: 2)
+        perfilNav.tabBarItem = UITabBarItem(title: "perfil", image: perfilIcono, tag: 3)
         
         vcCertificate.navigationItem.largeTitleDisplayMode = .automatic
         vcCertificate.navigationItem.title = "Certificados"
         vcAddStudent.navigationItem.largeTitleDisplayMode = .automatic
         vcAddStudent.navigationItem.title = "Agregar Alumno"
+        vcPerfil.navigationItem.largeTitleDisplayMode = .automatic
+        vcPerfil.navigationItem.title = "Perfil"
         
-        let items = [certfNav, addStudentNav]
+        let items = [certfNav, addStudentNav, perfilNav]
         for nav in items {
             tabBar.barTintColor = .white
         }

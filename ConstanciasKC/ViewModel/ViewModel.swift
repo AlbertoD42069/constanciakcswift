@@ -39,7 +39,7 @@ class ViewModel {
     func addStudentData (data: AddStudentData){
         firebaseServices.setStudent(addData: data)
     }
-    func userKCSignOut() {
+    func userKCSignOut(){
         firebaseServices.userSignOut()
     }
     

@@ -68,6 +68,7 @@ class FirebaseServices {
     func userSignOut(){
         do {
             try Auth.auth().signOut()
+            print("sesion cerrada")
         } catch let signOutError as NSError {
             print("Error al cerrar la sesion: \(signOutError)")
         }

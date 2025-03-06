@@ -28,6 +28,7 @@ class ViewController: UIViewController {
         setupConstraintsKC()
         //getDataStudents()
         viewLoginKC.loginKCDelegate = self
+        view.backgroundColor = .white
     }
     func addComponetsKC() {
         view.addSubview(viewLoginKC)

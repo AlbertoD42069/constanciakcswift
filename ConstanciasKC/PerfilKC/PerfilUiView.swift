@@ -8,7 +8,7 @@
 import UIKit
 
 protocol PerfilProtocol: AnyObject {
-    func setEmail() -> String
+    func logout()
 }
 
 class PerfilUiView: UIView {
@@ -33,11 +33,15 @@ class PerfilUiView: UIView {
     }()
     private let nameDirectoriaKCLbl: UILabel = {
         let names = UILabel()
+        names.textColor = .black
+        names.text = "Adela Albina Dominguez Diaz"
         names.translatesAutoresizingMaskIntoConstraints = false
         return names
     }()
     private let schoolNameKCLbl: UILabel = {
         let school = UILabel()
+        school.textColor = .black
+        school.text = "Rayon Chiapas"
         school.translatesAutoresizingMaskIntoConstraints = false
         return school
     }()
@@ -96,13 +100,13 @@ class PerfilUiView: UIView {
             schoolNameKCLbl.leadingAnchor.constraint(equalTo: viewcontainerKC.leadingAnchor, constant: 20),
             schoolNameKCLbl.trailingAnchor.constraint(equalTo: viewcontainerKC.trailingAnchor, constant: -20),
             
-            logoutKCBtn.topAnchor.constraint(equalTo: emailKCLbl.bottomAnchor, constant: 10),
+            logoutKCBtn.topAnchor.constraint(equalTo: schoolNameKCLbl.bottomAnchor, constant: 10),
             logoutKCBtn.leadingAnchor.constraint(equalTo: viewcontainerKC.leadingAnchor, constant: 20),
             logoutKCBtn.trailingAnchor.constraint(equalTo: viewcontainerKC.trailingAnchor, constant: -20)
         ])
     }
     @objc func logoutKC() {
-        print("logout")
+        perfilDelegate?.logout()
     }
     func setemail(email: String) {
         emailKCLbl.text = email
